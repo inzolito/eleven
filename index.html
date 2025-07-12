@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/openmoji/cat-face.svg">
-
   <title>Un paso hacia París</title>
+
+  <!-- Favicon de gato -->
+  <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/openmoji/cat-face.svg">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -13,7 +14,6 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
-  <!-- Estilos personalizados -->
   <style>
     body {
       background-color: #d6f5d6;
@@ -54,22 +54,41 @@
       color: #5b5b5b;
     }
 
-    .hashtags {
-      margin-top: 2rem;
-      font-size: 1rem;
-      color: #6b6b6b;
-      font-style: italic;
+    /* Hashtags animados */
+    .hashtags-zone {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      overflow: hidden;
+      margin-top: 3rem;
     }
 
-    .hashtags span {
-      margin-right: 0.6rem;
-      display: inline-block;
+    #hashtags-container {
+      animation: moveLeft 25s linear infinite;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hashtag-bubble {
+      background-color: #f3e5f5;
+      color: #6a1b9a;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: transform 0.4s ease;
     }
 
     @keyframes aterrizaje {
       0%   { transform: translateY(-10px) rotate(-5deg); opacity: 0.7; }
       50%  { transform: translateY(0px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-10px) rotate(-5deg); opacity: 0.7; }
+    }
+
+    @keyframes moveLeft {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
@@ -88,19 +107,9 @@
       <i class="fas fa-map-marker-alt"></i> Destino: <strong>Magdalena 140 - Carmen 339, París :')</strong>
     </div>
 
-    <div class="hashtags mt-4">
-      <span>#Cascada</span>
-      <span>#11:11</span>
-      <span>#Esperanza</span>
-      <span>#Meow</span>
-      <span>#SantaLucia</span>
-      <span>#ParqueJapones</span>
-      <span>#Check</span>
-      <span>#Paris</span>
-      <span>#CocinaC</span>
-      <span>#Bañito</span>
-      <span>#Cerrito</span>
-      <span>#EsaSonrisa</span>
+    <!-- Hashtags animados -->
+    <div class="hashtags-zone">
+      <div id="hashtags-container" class="d-flex flex-nowrap"></div>
     </div>
   </div>
 
@@ -110,10 +119,11 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Cuenta regresiva -->
+  <!-- Cuenta regresiva y hashtags -->
   <script>
     $(document).ready(function () {
-      const targetDate = new Date("2025-07-14T08:30:00").getTime();
+      // Cuenta regresiva
+      const targetDate = new Date("2050-07-14T08:30:00").getTime();
 
       function updateCountdown() {
         const now = new Date().getTime();
@@ -134,6 +144,31 @@
 
       updateCountdown();
       setInterval(updateCountdown, 1000);
+
+      // Hashtags animados
+      const hashtags = [
+        "#Cascada", "#11:11", "#Esperanza", "#Meow", "#SantaLucia", "#ParqueJapones",
+        "#Check", "#Paris", "#CocinaC", "#Bañito", "#Cerrito", "#EsaSonrisa"
+      ];
+
+      const container = $('#hashtags-container');
+
+      hashtags.forEach((tag) => {
+        const fontSize = Math.floor(Math.random() * 12 + 14); // 14px a 26px
+        const el = $('<div>')
+          .addClass('hashtag-bubble')
+          .css('font-size', fontSize + 'px')
+          .text(tag);
+        container.append(el);
+      });
+
+      // Cada 5s, cambia el tamaño de las burbujas aleatoriamente
+      setInterval(() => {
+        container.children().each(function () {
+          const newSize = Math.floor(Math.random() * 12 + 14);
+          $(this).css('font-size', newSize + 'px');
+        });
+      }, 5000);
     });
   </script>
 </body>
