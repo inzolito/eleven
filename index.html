@@ -70,15 +70,17 @@
       gap: 2rem;
     }
 
-    .hashtag-bubble {
-      background-color: #f3e5f5;
-      color: #6a1b9a;
-      border-radius: 50px;
-      padding: 0.5rem 1rem;
-      font-weight: 500;
-      white-space: nowrap;
-      transition: transform 0.4s ease;
-    }
+   /* Hashtags animados sin fondo y transición suave */
+  .hashtag-bubble {
+    background-color: transparent; /* sin fondo */
+    color: #6a1b9a;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: font-size 2s ease; /* transición suave */
+  }
+    
 
     @keyframes aterrizaje {
       0%   { transform: translateY(-10px) rotate(-5deg); opacity: 0.7; }
@@ -120,56 +122,58 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- Cuenta regresiva y hashtags -->
-  <script>
-    $(document).ready(function () {
-      // Cuenta regresiva
-      const targetDate = new Date("2050-07-14T08:30:00").getTime();
+ 
+<script>
+  $(document).ready(function () {
+    // Cuenta regresiva con fecha corregida
+    const targetDate = new Date("2025-07-14T08:30:00").getTime();
 
-      function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
-        if (distance < 0) {
-          $('#countdown').text("¡Llegamos a París!");
-          return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        $('#countdown').html(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
+      if (distance < 0) {
+        $('#countdown').text("¡Llegamos a París!");
+        return;
       }
 
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Hashtags animados
-      const hashtags = [
-        "#Cascada", "#11:11", "#Esperanza", "#Meow", "#SantaLucia", "#ParqueJapones",
-        "#Check", "#Paris", "#CocinaC", "#Bañito", "#Cerrito", "#EsaSonrisa"
-      ];
+      $('#countdown').html(`${days}d : ${hours}h : ${minutes}m : ${seconds}s`);
+    }
 
-      const container = $('#hashtags-container');
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-      hashtags.forEach((tag) => {
-        const fontSize = Math.floor(Math.random() * 12 + 14); // 14px a 26px
-        const el = $('<div>')
-          .addClass('hashtag-bubble')
-          .css('font-size', fontSize + 'px')
-          .text(tag);
-        container.append(el);
-      });
+    // Hashtags animados
+    const hashtags = [
+      "#Cascada", "#11:11", "#Esperanza", "#Meow", "#SantaLucia", "#ParqueJapones",
+      "#Check", "#Paris", "#CocinaC", "#Bañito", "#Cerrito", "#EsaSonrisa"
+    ];
 
-      // Cada 5s, cambia el tamaño de las burbujas aleatoriamente
-      setInterval(() => {
-        container.children().each(function () {
-          const newSize = Math.floor(Math.random() * 12 + 14);
-          $(this).css('font-size', newSize + 'px');
-        });
-      }, 5000);
+    const container = $('#hashtags-container');
+    container.empty();
+
+    hashtags.forEach((tag) => {
+      const fontSize = Math.floor(Math.random() * 12 + 14); // 14px a 26px
+      const el = $('<div>')
+        .addClass('hashtag-bubble')
+        .css('font-size', fontSize + 'px')
+        .text(tag);
+      container.append(el);
     });
-  </script>
+
+    // Cambios suaves de tamaño cada 5 segundos
+    setInterval(() => {
+      container.children().each(function () {
+        const newSize = Math.floor(Math.random() * 12 + 14);
+        $(this).css('font-size', newSize + 'px');
+      });
+    }, 5000);
+  });
+</script>
 </body>
 </html>
