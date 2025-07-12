@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="https://api.iconify.design/openmoji/cat-face.svg">
+
   <title>Un paso hacia París</title>
 
   <!-- Bootstrap -->
@@ -14,7 +16,7 @@
   <!-- Estilos personalizados -->
   <style>
     body {
-      background-color: #d6f5d6; /* verde pastel */
+      background-color: #d6f5d6;
       color: #2e2e2e;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
@@ -32,12 +34,12 @@
       font-weight: bold;
       margin-top: 2rem;
       letter-spacing: 3px;
-      color: #6a1b9a; /* morado oscuro */
+      color: #6a1b9a;
     }
 
     .icono-avion {
       font-size: 4rem;
-      color: #a020f0; /* morado */
+      color: #a020f0;
       animation: aterrizaje 2s ease-in-out infinite;
     }
 
@@ -46,16 +48,28 @@
       color: #444;
     }
 
+    .footer {
+      margin-top: 4rem;
+      font-size: 1.1rem;
+      color: #5b5b5b;
+    }
+
+    .hashtags {
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #6b6b6b;
+      font-style: italic;
+    }
+
+    .hashtags span {
+      margin-right: 0.6rem;
+      display: inline-block;
+    }
+
     @keyframes aterrizaje {
       0%   { transform: translateY(-10px) rotate(-5deg); opacity: 0.7; }
       50%  { transform: translateY(0px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-10px) rotate(-5deg); opacity: 0.7; }
-    }
-
-    .footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #777;
     }
   </style>
 </head>
@@ -71,7 +85,22 @@
     <div id="countdown">--:--:--:--</div>
 
     <div class="footer mt-5">
-      <i class="fas fa-location-dot"></i> Destino final: <strong>París, Francia</strong>
+      <i class="fas fa-map-marker-alt"></i> Destino: <strong>Magdalena 140 - Carmen 339, París :')</strong>
+    </div>
+
+    <div class="hashtags mt-4">
+      <span>#Cascada</span>
+      <span>#11:11</span>
+      <span>#Esperanza</span>
+      <span>#Meow</span>
+      <span>#SantaLucia</span>
+      <span>#ParqueJapones</span>
+      <span>#Check</span>
+      <span>#Paris</span>
+      <span>#CocinaC</span>
+      <span>#Bañito</span>
+      <span>#Cerrito</span>
+      <span>#EsaSonrisa</span>
     </div>
   </div>
 
@@ -84,7 +113,7 @@
   <!-- Cuenta regresiva -->
   <script>
     $(document).ready(function () {
-      const targetDate = new Date("2025-07-14T08:30:00").getTime();
+      const targetDate = new Date("2050-07-14T08:30:00").getTime();
 
       function updateCountdown() {
         const now = new Date().getTime();
@@ -109,4 +138,3 @@
   </script>
 </body>
 </html>
-
